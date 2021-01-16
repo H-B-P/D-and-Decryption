@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Encrypt</title>
+</head>
+<body>
+  <div> <button onclick="gen()">Generate Key</button></div>
+  <br>
+  <div id="Key"> Key: </div>
+  <br>
+  <div>Message:<input type="text" size="30" maxlength="30" id="message"></div>
+  <br>
+  <button onclick="encrypt()">Encrypt</button>
+  <br>
+  <div id="result">Encrypted Message: </div>
+<b style="font-size:28px">
+</div>
+  
+</b>
+<script id="jsbin-javascript">
+
+
+characters = '_ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+crypt = ""
+
+cryLen=30
+
+function gen(){
+ crypt = makeid(cryLen)
+ document.getElementById("Key").innerHTML = "Key: " + crypt
+}
+
+function encrypt(){
+ var message = document.getElementById("message").value
+ message = message.toUpperCase().replace(" ","_")
+ var em = ""
+ for ( var i = 0; i < cryLen; i++ ) {
+  if (i<message.length){numMess = characters.indexOf(message[i])}else{numMess=0}
+  numCrypt = characters.indexOf(crypt[i])
+  numEM = numMess-numCrypt
+  if (numEM<0){numEM+=27}
+  em+=characters[numEM]
+ }
+ document.getElementById("result").innerHTML = "Encrypted Message: "+em
+}
+
+function makeid(length) {
+   var result           = '';
+   for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 27));
+   }
+   return result;
+}
+
+
+</script>
+</body>
+</html>
